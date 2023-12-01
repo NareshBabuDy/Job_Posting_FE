@@ -1,0 +1,123 @@
+<div class="container">
+  <h5 class="btn btn-primary" (click)="add()">Post New Job</h5>
+  <div class="row">
+    <div class="col-12">
+      <ng-lottie
+        *ngIf="lottieee && jobs.length === 0"
+        style="width: 100px; height: 100px"
+        [options]="options"
+      ></ng-lottie>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="card mb-2" *ngFor="let job of jobs">
+        <div class="card-body">
+          <h5 class="card-title">{{ job.title }}</h5>
+          <p class="card-text">{{ job.description }}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Count:</strong> {{ job.count }}
+            </li>
+            <li class="list-group-item">
+              <strong>Last Date:</strong> {{ job.lastdate }}
+            </li>
+            <li class="list-group-item">
+              <strong>Posted At:</strong> {{
+                job.postedDate
+                  ? (job.postedDate | date : "MMM yyyy")
+                  : "Not specified"
+              }}
+            </li>
+
+            <li class="list-group-item">
+              <button class="btn btn-primary" (click)="editJob(job)">
+                Edit</button
+              ><button class=" ms-2 btn btn-danger" (click)="deleteJob(job.id!)">
+                Delete
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-6" *ngIf="jobForm">
+      <!-- Title -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="jobTitle"
+          name="title"
+          placeholder="Enter title"
+          required
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          [(ngModel)]="jobDescription"
+          name="description"
+          placeholder="Enter description"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+
+      <!-- Count -->
+      <div class="form-group">
+        <label for="count">Count</label>
+        <input
+          type="number"
+          class="form-control"
+          id="count"
+          [(ngModel)]="jobCount"
+          name="count"
+          placeholder="Enter count"
+          required
+        />
+      </div>
+
+      <!-- Last Date -->
+      <div class="form-group">
+        <label for="lastDate">Last Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="lastDate"
+          [(ngModel)]="lastdate"
+          name="lastdate"
+          required
+        />
+      </div>
+
+      <!-- Category ID -->
+      <div class="form-group">
+        <label for="categoryId">Category ID</label>
+        <select
+          class="form-control"
+          id="categoryId"
+          [(ngModel)]="categoryId"
+          name="categoryId"
+          required
+        >
+          <option value="" disabled>Select a category</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.title }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" (click)="postJob()" class="btn btn-primary">
+        {{ submitbtn }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<section class="h-100" id="login">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-6">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+
+      <div id="glass" class="col-6 card">
+        <p class="font fs-3 text-uppercase text-decoration-underline">
+          Hi, Welcome Back!
+        </p>
+        <p class="font fs-3 text-uppercase text-decoration-underline">
+          Login Page
+        </p>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <!-- Username input -->
+          <label class="d-flex align-items-start mb-2 font fs-4 text-uppercase"
+            >Email address*</label
+          >
+          <div class="form-floating mb-5">
+            <input
+              type="email"
+              class="form-control custom-border-color"
+              id="floatingInput"
+              [(ngModel)]="username"
+              name="username"
+              #Namevaild="ngModel"
+              minlength="3"
+              pattern="^[a-zA-Z0-9_]{3,20}$"
+              maxlength="25"
+              [ngClass]="
+                Namevaild.invalid && Namevaild.dirty ? 'is-invalid' : ''
+              "
+              placeholder="name@example.com"
+            />
+            <div *ngIf="Namevaild.invalid" class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
+
+            <label for="floatingInput">Email address</label>
+          </div>
+
+          <!-- Password input -->
+          <label class="d-flex align-items-start mb-2 font fs-4 text-uppercase"
+            >Password*</label
+          >
+          <div class="form-floating mb-5">
+            <input
+              type="password"
+              class="form-control custom-border-color"
+              id="floatingPassword"
+              [(ngModel)]="password"
+              name="password"
+              #passwordValid="ngModel"
+              minlength="8"
+              [ngClass]="
+                passwordValid.invalid && passwordValid.dirty ? 'is-invalid' : ''
+              "
+              placeholder="Password"
+            />
+            <div *ngIf="passwordValid.invalid" class="invalid-feedback">
+              Invalid Password
+            </div>
+
+            <label for="floatingPassword">Password</label>
+          </div>
+
+          <p
+            class="error d-flex align-items-start mb-2 fs-5"
+            [ngClass]="error.length > 0 ? 'visible' : 'invisible'"
+          >
+            {{ error }}
+          </p>
+
+          <div class="d-flex align-items-center mb-4">
+            <span>Not registered?</span>
+            <a
+              routerLink="/register"
+              class="text-decoration-none px-2"
+              >Register here</a
+            >
+          </div>
+
+          <!-- Submit button -->
+          <div class="d-grid gap-2">
+            <button
+              type="submit"
+              class="btn btn-primary d-flex justify-content-center align-items-center fs-4 w-100 gap-2 my-5 p-3"
+            >
+
+            Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

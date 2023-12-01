@@ -1,0 +1,59 @@
+<div
+  class="row m-4"
+  style="background-color: #f8f9fa; padding: 20px; border-radius: 10px"
+>
+  <div *ngIf="lottiee && Applications.length === 0">
+    <ng-lottie [options]="options"></ng-lottie>
+  </div>
+  <div *ngIf="!lottiee || Applications.length > 0" class="col-8">
+    <table
+      class="table table-bordered table-striped"
+      style="background-color: #ffffff"
+    >
+      <thead style="background-color: #007bff; color: #ffffff">
+        <tr>
+          <th colspan="5">Application</th>
+        </tr>
+        <tr>
+          <th>Application Id</th>
+          <th>Applicant Name</th>
+          <th>Date Of Applied</th>
+          <th colspan="2">Status</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let application of Applications">
+        <tr>
+          <th scope="row">{{ application.id }}</th>
+          <td>{{ application.profileName }}</td>
+          <td>
+            {{
+              application.dateOfApply
+                ? (application.dateOfApply | date : "MMM yyyy")
+                : "Not specified"
+            }}
+          </td>
+          <td>
+            <div class="form-check form-check-inline">
+              <input
+                type="text"
+                class="form-control"
+                id="status"
+                name="status"
+                [(ngModel)]="application.status"
+                placeholder="Enter status"
+              />
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="changeStatus(application)">
+              Send
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-4">
+    <ng-lottie [options]="options"></ng-lottie>
+  </div>
+</div>

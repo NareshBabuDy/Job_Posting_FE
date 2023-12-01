@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Profile ID</th>
+      <th>Job ID</th>
+      <th>Profile Name</th>
+      <th>Job Name</th>
+      <th>Date of Apply</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let application of applied">
+      <td>{{ application.id }}</td>
+      <td>{{ application.profileId }}</td>
+      <td>{{ application.jobId }}</td>
+      <td>{{ application.profileName  }}</td>
+      <td>{{ application.jobName  }}</td>
+      <td>{{ application.dateOfApply | date: 'MMMM y' }}</td>
+      <td>{{ application.status }}</td>
+    </tr>
+  </tbody>
+</table>

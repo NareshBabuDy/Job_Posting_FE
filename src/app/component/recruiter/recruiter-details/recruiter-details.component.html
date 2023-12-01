@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Left Column - Display Table -->
+    <div class="col-md-6 ">
+      <h2 style="color: black;">Company Information</h2>
+      <table class="table">
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <img
+              src="{{
+                'http://localhost:8080/api/downloadFile/companyPhoto/' + company.id
+              }}"
+              alt=""
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Company Name</td>
+          <td>{{ company.companyName }}</td>
+        </tr>
+        <tr>
+          <td>Company WebSite:</td>
+          <td>{{ company.companyUrl }}</td>
+        </tr>
+        <tr>
+          <td>About Company:</td>
+          <td>{{ company.aboutCompany }}</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button class="btn btn-primary" (click)="edit()">Edit</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-md-6" *ngIf="showEditForm">
+      <div>
+        <h2>Edit Company Information</h2>
+        <div class="form-group">
+          <input type="hidden" name="" id="" />
+          <label for="firstName">Company Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your First Name"
+            [(ngModel)]="iCompanyName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Company Url:</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="iCompanyUrl"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">About:</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="iAbout"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

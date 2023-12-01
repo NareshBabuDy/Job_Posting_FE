@@ -1,0 +1,77 @@
+<style>
+  .card:hover {
+    transform: scale(1.05); /* Increase size on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+
+  .card {
+    transition: all 0.3s ease; /* Smooth transition for initial state */
+  }
+</style>
+
+<div *ngIf="jobLottie" class="container text-center mt-4">
+  <ng-lottie [options]="nojob"></ng-lottie>
+</div>
+
+<div *ngIf="!jobLottie" class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center mb-4" style="color: blueviolet">Available Jobs</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex flex-wrap justify-content-around">
+      <div *ngFor="let job of jobs" class="card col-md-4 mb-4 me-3">
+        <!-- Job Card -->
+        <div class="card-body">
+          <!-- Row 1 -->
+          <div class="row">
+            <!-- Column 1: Image -->
+            <div class="col-6">
+              <img
+                src="{{
+                  'http://localhost:8080/api/downloadFile/companyPhoto/' +
+                    job.companyId
+                }}"
+                class="img-fluid rounded"
+                alt="Job Image"
+              />
+            </div>
+            <!-- Column 2: Job Details -->
+            <div class="col-6">
+              <h5 class="card-title">Job Name {{ job.title }}</h5>
+              <p class="card-text">No of Vacancy Available: {{ job.count }}</p>
+              <p class="card-text">
+                Date Posted:
+                {{
+                  job.postedDate
+                    ? (job.postedDate | date : "MMM yyyy")
+                    : "Not specified"
+                }}
+              </p>
+              <p class="card-text">Last Date to Apply: {{ job.lastdate }}</p>
+              <p class="card-text">Job Type: {{ job.categoryId }}</p>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="row mt-2">
+            <!-- Column 1: Job Description -->
+            <div class="col-12">
+              <p class="card-text">
+                {{ job.description }}
+              </p>
+            </div>
+            <!-- Column 2: Apply Button -->
+            <div class="col-12 text-center mt-2">
+              <button class="btn btn-primary" (click)="applyToJob(job.id!)">
+                Apply Now
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- End Job Card -->
+      </div>
+    </div>
+  </div>
+</div>

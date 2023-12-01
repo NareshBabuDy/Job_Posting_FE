@@ -1,0 +1,141 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Left Column - Display Table -->
+    <div class="col-md-6">
+      <h2>Person Information</h2>
+      <table class="table">
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>First Name</td>
+          <td>{{ profiles.firstName }}</td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td>{{ profiles.lastName }}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{ profiles.email }}</td>
+        </tr>
+        <tr>
+          <td>Phone Number</td>
+          <td>{{ profiles.phoneNumber }}</td>
+        </tr>
+        <tr>
+          <td>gender</td>
+          <td>{{ profiles.gender }}</td>
+        </tr>
+        <tr>
+          <td>Skiils</td>
+          <td>{{ profiles.skills }}</td>
+        </tr>
+        <tr>
+          <td>Experience</td>
+          <td>{{ profiles.experience }}</td>
+        </tr>
+        <tr>
+          <td>Photo</td>
+          <td>
+            <img
+              style="height: 100px; width: 90px"
+              src="{{
+                'http://localhost:8080/api/downloadFile/' + profiles.appUserId
+              }}"
+              alt=""
+            />
+          </td>
+        </tr>
+        <pdf-viewer
+          src="{{
+            'http://localhost:8080/api/downloadFile/profilePhoto/' +
+              profiles.appUserId
+          }}"
+          [render-text]="true"
+          [original-size]="false"
+          style="width: 350px; height: 350px"
+        ></pdf-viewer>
+        <tr>
+          <td colspan="2">
+            <button class="btn btn-primary" (click)="edit()">Edit</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-md-6" *ngIf="showEditForm">
+      <div>
+        <h2>Edit Person Information</h2>
+        <div class="form-group">
+          <input type="hidden" name="" id="" />
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your First Name"
+            [(ngModel)]="ifirstname"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="ilastName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="iemail"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="iphoneNumber"
+          />
+        </div>
+        <div class="form-group">
+          <label for="gender">gender</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="igender"
+          />
+        </div>
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="iskills"
+          />
+        </div>
+        <div class="form-group">
+          <label for="experience">Experience</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your name"
+            [(ngModel)]="iexperience"
+          />
+       
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="row ms-5 ">
+  <div class="col-6">
+    <table class="table rounded-pill table-secondary">
+      <thead>
+        <tr>
+          <th colspan="4">User Details</th>
+        </tr>
+        <tr>
+          <th>Si.No.</th>
+          <th>User Name</th>
+          <th>User Type</th>
+          <th>VIEW DETAILS</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users">
+        <ng-container *ngIf="user.role !== 'ADMIN'">
+          <tr>
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <button
+                (click)="showDetails(user.id, user.role)"
+                class="btn btn-primary"
+              >
+                View
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="col-6 h-100 position-fixed mt-5 p-5 ms-5"
+    style="right: 0; top: 0; height: 100vh; overflow-y: auto"
+    *ngIf="viewUserDetails"
+  >
+    <div class="col-4 w-75 h-100 ms-5">
+      <div class="card bg-lightd-flex justify-content-center ms-5">
+        <div class="row">
+          <div class="col-10"></div>
+          <div class="col-2">
+            <button
+              (click)="close()"
+              type="button"
+              class="btn-close me-3 mt-4"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+        <div class="row-2 my-3 ms-4 w-25 d-flex align-items-center">
+          <img
+          style="height: 100px; width: 90px;" src="{{
+            'http://localhost:8080/api/downloadFile/'+Profile.appUserId            
+          }}" alt=""
+            style="height: 150px; width: 150px"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ Profile.firstName }} {{ Profile.lastName }}
+          </h5>
+
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td><strong>Gender:</strong></td>
+                <td>{{ Profile.gender }}</td>
+              </tr>
+              <tr>
+                <td><strong>Phone Number:</strong></td>
+                <td>{{ Profile.phoneNumber }}</td>
+              </tr>
+              <tr>
+                <td><strong>Email:</strong></td>
+                <td>{{ Profile.email }}</td>
+              </tr>
+              <tr>
+                <td><strong>Skills:</strong></td>
+                <td>{{ Profile.skills }}</td>
+              </tr>
+              <tr>
+                <td><strong>Experience:</strong></td>
+                <td>{{ Profile.experience }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-6 position-fixed mt-5 p-5 ms-5"
+    style="right: 0; top: 0; height: 100vh; overflow-y: auto"
+    *ngIf="viewComapnyDetails"
+  >
+    <div class="col-4 w-75 h-100 ms-5">
+      <div class="card d-flex justify-content-center ms-5">
+        <div class="row">
+          <div class="col-10"></div>
+          <div class="col-2">
+            <button
+              (click)="close()"
+              type="button"
+              class="btn-close me-3 mt-4"
+              aria-label="Close"
+            ></button>
+          </div>
+        </div>
+        <img
+        src="{{
+          'http://localhost:8080/api/downloadFile/companyPhoto/' + companies.id
+        }}"
+        alt=""
+      />        <div class="card-body">
+          <h5 class="card-title">
+            {{ companies.companyName }}
+          </h5>
+
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td><strong>Company Url</strong></td>
+                <td>
+                  <a href="{{ companies.companyUrl }}">{{
+                    companies.companyUrl
+                  }}</a>
+                </td>
+              </tr>
+              <tr>
+                <h3>About</h3>
+                {{
+                  companies.aboutCompany
+                }}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

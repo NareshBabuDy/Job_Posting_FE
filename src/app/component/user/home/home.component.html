@@ -1,0 +1,33 @@
+<!-- <div *ngIf="!showlottie" class="container mt-4"> -->
+  <h2>Applicant Table</h2>
+  <table class="ms-3 table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Applicant ID</th>
+        <th scope="col">Applicant Name</th>
+        <th scope="col">JobTitile</th>
+        <th scope="col">Date of Applied</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let apply of applied">
+        <th scope="row">{{ apply.id }}</th>
+        <td>{{ apply.profileName }}</td>
+        <td>{{ apply.jobName }}</td>
+        <td> {{
+          apply.dateOfApply
+            ? (apply.dateOfApply| date : "MMM yyyy")
+            : "Not specified"
+        }}</td>
+        <td>{{ apply.status! }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+<div *ngIf="showlottie">
+  <ng-lottie [options]="options"></ng-lottie>
+</div>
+
+<!-- </div> -->
+

@@ -1,0 +1,523 @@
+<section id="regi" class="h-100">
+  <div class="container py-5 h-100">
+    <div>
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-6">
+          <p class="font fs-3 text-uppercase text-decoration-underline">
+            Register Page
+          </p>
+          <div class="d-flex">
+            <label
+              class="d-flex align-items-start mb-2 font fs-4 text-uppercase"
+              >Recruiter Register</label
+            >
+            <label class="switch mx-3">
+              <input [(ngModel)]="userType" type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+            <label
+              class="d-flex align-items-start mb-2 font fs-4 text-uppercase"
+              >User Register</label
+            >
+          </div>
+
+          <div *ngIf="userType">
+            <form #userForm="ngForm" (submit)="userRegister(userForm)">
+              <!-- Email input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingUsernameInput"
+                  ngModel
+                  name="username"
+                  #usernameValid="ngModel"
+                  pattern="^[a-zA-Z0-9_]{3,20}$"
+                  minlength="3"
+                  maxlength="20"
+                  [ngClass]="
+                    usernameValid.invalid && usernameValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Username"
+                />
+                <div *ngIf="usernameValid.invalid" class="invalid-feedback">
+                  Please enter a valid username.
+                </div>
+                <label for="floatingUsernameInput">Username</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPasswordInput"
+                  ngModel
+                  name="password"
+                  #passwordValid="ngModel"
+                  minlength="8"
+                  [ngClass]="
+                    passwordValid.invalid && passwordValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Password"
+                />
+                <div *ngIf="passwordValid.invalid" class="invalid-feedback">
+                  Please enter a valid password.
+                </div>
+                <label for="floatingPasswordInput">Password</label>
+              </div>
+
+              <!-- Confirm Password input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingConfirmPasswordInput"
+                  ngModel
+                  name="confirmPassword"
+                  #confirmPasswordValid="ngModel"
+                  [ngClass]="
+                    confirmPasswordValid.invalid && confirmPasswordValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Confirm Password"
+                />
+                <div
+                  *ngIf="confirmPasswordValid.invalid"
+                  class="invalid-feedback"
+                >
+                  Passwords do not match.
+                </div>
+                <label for="floatingConfirmPasswordInput"
+                  >Confirm Password</label
+                >
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  ngModel
+                  name="firstName"
+                  #firstNameValid="ngModel"
+                  minlength="2"
+                  maxlength="100"
+                  [ngClass]="
+                    firstNameValid.invalid && firstNameValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="First Name"
+                />
+                <div *ngIf="firstNameValid.invalid" class="invalid-feedback">
+                  Please enter a valid first name.
+                </div>
+                <label for="firstName">First Name</label>
+              </div>
+
+              <!-- Last Name -->
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  ngModel
+                  name="lastName"
+                  #lastNameValid="ngModel"
+                  minlength="2"
+                  maxlength="100"
+                  [ngClass]="
+                    lastNameValid.invalid && lastNameValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Last Name"
+                />
+                <div *ngIf="lastNameValid.invalid" class="invalid-feedback">
+                  Please enter a valid last name.
+                </div>
+                <label for="lastName">Last Name</label>
+              </div>
+
+              <!-- Gender selection -->
+              <div class="form-group">
+                <div class="form-floating mb-3">
+                  <!-- Gender -->
+                  <div class="form-check form-check-inline mb-3">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="maleRadio"
+                      value="Male"
+                      [(ngModel)]="gender"
+                      name="gender"
+                      required
+                    />
+                    <label class="form-check-label" for="maleRadio">Male</label>
+                  </div>
+
+                  <div class="form-check form-check-inline mb-3">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="femaleRadio"
+                      value="Female"
+                      [(ngModel)]="gender"
+                      name="gender"
+                      required
+                    />
+                    <label class="form-check-label" for="femaleRadio"
+                      >Female</label
+                    >
+                  </div>
+
+                  <div *ngIf="!gender" class="invalid-feedback">
+                    Please select a gender.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="phoneNumber"
+                  ngModel
+                  name="phoneNumber"
+                  #phoneNumberValid="ngModel"
+                  pattern="[0-9]{10,}"
+                  [ngClass]="
+                    phoneNumberValid.invalid && phoneNumberValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Phone Number"
+                />
+                <div *ngIf="phoneNumberValid.invalid" class="invalid-feedback">
+                  Please enter a valid phone number.
+                </div>
+                <label for="phoneNumber">Phone Number</label>
+              </div>
+
+              <!-- Email -->
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  ngModel
+                  name="email"
+                  #emailValid="ngModel"
+                  pattern="^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$"
+                  minlength="3"
+                  maxlength="30"
+                  [ngClass]="
+                    emailValid.invalid && emailValid.dirty ? 'is-invalid' : ''
+                  "
+                  placeholder="name@example.com"
+                />
+                <div *ngIf="emailValid.invalid" class="invalid-feedback">
+                  Please enter a valid email address.
+                </div>
+                <label for="email">Email Address</label>
+              </div>
+              <!-- Company Photo input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="floatingprofilePhoto"
+                  ngModel
+                  name="profilePhoto"
+                  #profilePhoto="ngModel"
+                  accept="image/*"
+                  (change)="onProfileChange($event)"
+                />
+                <div *ngIf="profilePhoto.invalid" class="invalid-feedback">
+                  Please upload a valid company photo.
+                </div>
+              </div>
+
+              <!-- Company Photo input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="floatingCompanyPhotoInput"
+                  ngModel
+                  name="companyPhoto"
+                  #companyPhotoValid="ngModel"
+                  (change)="onFileChange($event)"
+                />
+                <div *ngIf="companyPhotoValid.invalid" class="invalid-feedback">
+                  Please upload a valid company photo.
+                </div>
+                <label for="floatingCompanyPhotoInput">Company Photo</label>
+              </div>
+              <!-- Skills -->
+
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="skills"
+                  ngModel
+                  name="skills"
+                  #skillsValid="ngModel"
+                  minlength="2"
+                  maxlength="100"
+                  [ngClass]="
+                    skillsValid.invalid && skillsValid.dirty ? 'is-invalid' : ''
+                  "
+                  placeholder="Skills"
+                />
+                <div *ngIf="skillsValid.invalid" class="invalid-feedback">
+                  Please enter valid skills.
+                </div>
+                <label for="skills">Skills</label>
+              </div>
+
+              <!-- Experience -->
+
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="experience"
+                  ngModel
+                  name="experience"
+                  #experienceValid="ngModel"
+                  minlength="2"
+                  maxlength="100"
+                  [ngClass]="
+                    experienceValid.invalid && experienceValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Experience"
+                />
+                <div *ngIf="experienceValid.invalid" class="invalid-feedback">
+                  Please enter valid experience details.
+                </div>
+                <label for="experience">Experience</label>
+              </div>
+
+              <p
+                class="error d-flex align-items-start mb-2 fs-5"
+                [ngClass]="error.length > 0 ? 'visible' : 'invisible'"
+              >
+                {{ error }}
+              </p>
+
+              <div class="d-flex align-items-center mb-4">
+                <span>Already Registered?</span>
+                <a
+                  routerLink="/login"
+                  class="text-primary text-decoration-none px-2"
+                  >Login Page</a
+                >
+              </div>
+
+              <!-- Submit button -->
+              <div class="d-grid gap-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary d-flex justify-content-center align-items-center fs-4 w-100 gap-2 my-5 p-3"
+                  [disabled]="userForm.invalid"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="!userType">
+            <!-- Username input -->
+            <form
+              (submit)="companyRegiseter(companyForm)"
+              #companyForm="ngForm"
+            >
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingUsernameInput"
+                  ngModel
+                  name="username"
+                  #usernameValid="ngModel"
+                  minlength="3"
+                  maxlength="20"
+                  [ngClass]="
+                    usernameValid.invalid && usernameValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Username"
+                />
+                <div *ngIf="usernameValid.invalid" class="invalid-feedback">
+                  Please enter a valid username.
+                </div>
+                <label for="floatingUsernameInput">Username</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPasswordInput"
+                  ngModel
+                  name="password"
+                  #passwordValid="ngModel"
+                  minlength="8"
+                  [ngClass]="
+                    passwordValid.invalid && passwordValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Password"
+                />
+                <div *ngIf="passwordValid.invalid" class="invalid-feedback">
+                  Please enter a valid password.
+                </div>
+                <label for="floatingPasswordInput">Password</label>
+              </div>
+
+              <!-- Confirm Password input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingConfirmPasswordInput"
+                  ngModel
+                  name="confirmPassword"
+                  #confirmPasswordValid="ngModel"
+                  [ngClass]="
+                    confirmPasswordValid.invalid && confirmPasswordValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Confirm Password"
+                />
+                <div
+                  *ngIf="confirmPasswordValid.invalid"
+                  class="invalid-feedback"
+                >
+                  Passwords do not match.
+                </div>
+                <label for="floatingConfirmPasswordInput"
+                  >Confirm Password</label
+                >
+              </div>
+
+              <!-- Company Name input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingCompanyNameInput"
+                  ngModel
+                  name="companyName"
+                  #companyNameValid="ngModel"
+                  placeholder="Company Name"
+                />
+                <div *ngIf="companyNameValid.invalid" class="invalid-feedback">
+                  Please enter a valid company name.
+                </div>
+                <label for="floatingCompanyNameInput">Company Name</label>
+              </div>
+
+              <!-- Company URL input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingCompanyUrlInput"
+                  ngModel
+                  name="companyUrl"
+                  #companyUrlValid="ngModel"
+                  placeholder="Company URL"
+                />
+                <div *ngIf="companyUrlValid.invalid" class="invalid-feedback">
+                  Please enter a valid company URL.
+                </div>
+                <label for="floatingCompanyUrlInput">Company URL</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingcompanyType"
+                  ngModel
+                  name="companyType"
+                  #usernameValid="ngModel"
+                  minlength="3"
+                  maxlength="20"
+                  [ngClass]="
+                    usernameValid.invalid && usernameValid.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                  placeholder="Username"
+                />
+                <div *ngIf="usernameValid.invalid" class="invalid-feedback">
+                  Please enter a valid username.
+                </div>
+                <label for="floatingcompanyType">companyType</label>
+              </div>
+              <!-- About Company input -->
+              <div class="form-floating mb-3">
+                <textarea
+                  class="form-control"
+                  id="floatingAboutCompanyInput"
+                  ngModel
+                  name="aboutCompany"
+                  #aboutCompanyValid="ngModel"
+                  placeholder="About Company"
+                  rows="3"
+                ></textarea>
+                <div *ngIf="aboutCompanyValid.invalid" class="invalid-feedback">
+                  Please enter valid information about the company.
+                </div>
+                <label for="floatingAboutCompanyInput">About Company</label>
+              </div>
+
+              <!-- Company Photo input -->
+              <div class="form-floating mb-3">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="floatingCompanyPhotoInput"
+                  ngModel
+                  name="companyPhoto"
+                  #companyPhotoValid="ngModel"
+                  accept="image/*"
+                  (change)="onFileChange($event)"
+                />
+                <div *ngIf="companyPhotoValid.invalid" class="invalid-feedback">
+                  Please upload a valid company photo.
+                </div>
+                <label for="floatingCompanyPhotoInput">Company Photo</label>
+              </div>
+              <!-- Submit button -->
+              <div class="d-grid gap-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary d-flex justify-content-center align-items-center fs-4 w-100 gap-2 my-5 p-3"
+                  [disabled]="companyForm.invalid"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-lottie [options]="options1" *ngIf="registerloti"></ng-lottie>
+  </div>
+</section>

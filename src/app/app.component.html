@@ -1,0 +1,196 @@
+<div *ngIf="!isLoggedIn">
+  <router-outlet />
+</div>
+
+<div *ngIf="isLoggedIn" class="container-fluid h-100">
+  <div class="row d-flex fixed-top h-100">
+    <div class="col-2 m-0 p-0">
+      <div *ngIf="isAdmin" class="row h-100 m-0 p-0">
+        <div class="row-2 my-3 ms-5 p-2 d-flex align-items-center m-0 p-0">
+          <img src="../assets/logo - Copy.png" height="50px" alt="" class="" />
+          <p class="fs-2" id="logo">JoBBoT</p>
+        </div>
+        <img style="height: 100px; width: 90px;" src="../assets/background.jpg" alt="" 
+          class="mx-5 p-0 m-0"
+          style="height: 150px; width: 150px; border-radius: 50% !important"
+        />
+        <div
+          class="row w-100 h-100 pe-0 m-0 d-flex justify-content-center"
+          id="nav"
+        >
+          <ul class="m-0 p-0">
+            <li class="active six">
+              <a
+                [routerLink]="['admin']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-house-door-fill"></i> Home
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['admin/categories']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-files-alt"></i> Categories
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['admin/jobs']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-person-workspace"></i> Jobs
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['admin/companys']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-house-door-fill"></i> Companies
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="isRecruiter" class="row h-100 m-0 p-0">
+        <div class="row-2 my-3 ms-5 p-2 d-flex align-items-center m-0 p-0">
+          <img
+            src="../assets/logo - Copy.png"
+            height="50px"
+            alt=""
+            class=""
+          />
+          <p class="fs-2" id="logo">JoBBoT</p>
+        </div>
+        <img
+              src="{{
+                'http://localhost:8080/api/downloadFile/companyPhoto/' + username.id
+              }}"
+              alt=""
+            />
+        <div
+          class="row w-100 h-100 pe-0 m-0 d-flex justify-content-center"
+          id="nav"
+        >
+          <ul class="m-0 p-0">
+            <li class="active six">
+              <a
+                [routerLink]="['recruiter']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-house-door-fill"></i> Home
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['recruiter/jobs']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-person-workspace"></i> Jobs
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['recruiter/company']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-house-door-fill"></i> Companies
+              </a>
+            </li>
+            <!-- <li class="active six">
+              <a
+                [routerLink]="['selected-candidates']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-check2"></i> Selected Candidates
+              </a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="!isAdmin && !isRecruiter" class="row h-100 m-0 p-0">
+        <div class="row-2 my-3 ms-5 p-2 d-flex align-items-center m-0 p-0">
+          <img src="../assets/logo - Copy.png" height="50px" alt="" class="" />
+          <p class="fs-2" id="logo">JoBBoT</p>
+        </div>
+        <img
+        src="{{
+          'http://localhost:8080/api/downloadFile/'+username.id            
+        }}"          alt=""
+          class="mx-5 p-0 m-0"
+          style="height: 150px; width: 150px; border-radius: 50% !important"
+        />
+        <div class="row w-100 h-100 pe-0 m-0 d-flex justify-content-center" id="nav">
+          <ul class="m-0 p-0">
+            <li class="active six">
+              <a
+                [routerLink]="['/']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-house-door-fill"></i> Home
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['user/profile']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-person"></i> User Profile
+              </a>
+            </li>
+            <li class="active six">
+              <a
+                [routerLink]="['user/jobs']"
+                routerLinkActive="sideBarActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <i class="bi bi-person-workspace"></i> User Jobs
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      
+    </div>
+    <div
+      class="col-10 h-100"
+      style="
+        background-color: #eae6ea;
+        height: 80vh;
+        margin: 0%;
+        padding: 0%;
+        overflow-y: auto;
+      "
+    >
+      <app-nav
+        class="row w-100 p-0 m-0"
+        style="background-color: azure !important"
+      ></app-nav>
+      <div class="row mt-5 w-100">
+
+        <router-outlet class="ms-5">
+          
+        </router-outlet>
+      </div>
+    </div>
+
+    <div *ngIf="loaderService.isLoading | async" class="loader">
+      <ng-lottie [options]="options"></ng-lottie>
+    </div>
+  </div>
+</div>

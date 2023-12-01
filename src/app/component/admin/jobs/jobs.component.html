@@ -1,0 +1,44 @@
+<div *ngIf="showLottie">
+  <ng-lottie [options]="options"></ng-lottie>
+</div>
+
+<div *ngIf="!showLottie">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="card col-4 mb-3" *ngFor="let job of jobs">
+        <img
+          src="{{
+            'http://localhost:8080/api/downloadFile/companyPhoto/' +
+              job.companyId
+          }}"
+          class="card-img-top"
+          alt="Company Logo"
+          style="height: 150px; object-fit: cover"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ job.title }}</h5>
+          <p class="card-text">{{ job.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Vacancies:</strong> {{ job.count }}
+          </li>
+          <li class="list-group-item">
+            <strong>Last Date:</strong> {{ job.lastdate }}
+          </li>
+          <li class="list-group-item">
+            <strong>Posted At:</strong> {{ job.postedDate | date : "MMMM y" }}
+          </li>
+          <li class="list-group-item">
+            <strong>Job Type:</strong> {{ job.categoryId }}
+          </li>
+          <li class="list-group-item text-center">
+            <button class="btn btn-danger" (click)="deleteJob(job.id!)">
+              Delete
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

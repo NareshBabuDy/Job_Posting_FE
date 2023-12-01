@@ -1,0 +1,50 @@
+<style>
+  .card {
+    transition: height 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    height: 350px; /* Adjust the expanded height as per your requirement */
+  }
+</style>
+
+<div class="container mt-5">
+  <h2>Company Details</h2>
+
+  <!-- Company Card Section -->
+  <div class="row">
+    <div *ngFor="let company of companies" class="col-md-4">
+      <div class="card mb-4" style="height: 250px">
+        <!-- Adjust the initial height as per your requirement -->
+        <div class="row g-0">
+          <!-- Left column for company details -->
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ company.companyName }}</h5>
+              <p class="card-text">
+                Company URL:
+                <a href="{{ company.companyUrl }}" target="_blank">{{
+                  company.companyUrl
+                }}</a>
+              </p>
+              <p class="card-text">{{ company.aboutCompany }}</p>
+            </div>
+          </div>
+
+          <!-- Right column for company photo -->
+          <div class="col-md-4 pe-3 d-flex align-items-center">
+            <img
+              src="{{
+                'http://localhost:8080/api/downloadFile/companyPhoto/' +
+                  company.id
+              }}"
+              class="img-fluid me-5 rounded-circle"
+              alt="Company Photo"
+              style="max-width: 100%; max-height: 100%; object-fit: contain"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
