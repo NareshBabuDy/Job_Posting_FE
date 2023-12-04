@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
     experience: '',
     appUserId: 0,
     photo: '',
-    resume: ''
+    resume: '',
   };
   ifirstname: string = '';
   ilastName: string = '';
@@ -33,7 +33,6 @@ export class UserProfileComponent implements OnInit {
   iemail: string = '';
   iskills: string = '';
   iexperience: string = '';
-  profilePhoto: any = [];
 
   constructor(
     private storageService: StorageService,
@@ -45,10 +44,8 @@ export class UserProfileComponent implements OnInit {
     this.profileService.getProfile(this.user.id).subscribe({
       next: (response: AppResponse) => {
         this.profiles = response.data;
-
-        if (response.data === null) {
-          this.showEditForm = true;
-        }
+        console.log(this.profiles);
+        
       },
       error: (err) => {
         let message: string = err?.error?.error?.message;
@@ -69,44 +66,28 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.user.id !== null && this.user.id !== undefined) {
-      // let userprofileUpdate: Profile = {
-      //   id: this.profiles.id,
-      //   firstName: this.ifirstname,
-      //   lastName: this.ilastName,
-      //   Gender: this.igender,
-      //   phoneNumber: this.iphoneNumber,
-      //   email: this.iemail,
-      //   skills: this.iskills,
-      //   experience: this.iexperience,
-      //   appUserId: this.user.id,
-      // };
-      const profileData: any = {
-        Id: this.profiles.id,
-        firstName: this.ifirstname,
-        lastName: this.ilastName,
-        gender: this.igender,
-        phoneNumber: this.iphoneNumber,
-        email: this.iemail,
-        skills: this.iskills,
-        experience: this.iexperience,
-        appUserId: this.user.id,
-        
-      };
-      this.profileService.editProfile(profileData).subscribe({
-        next: (response: any) => {
-          this.profiles = response.data;
-          
-          this.ngOnInit();
-        },
-        error: (err) => {
-          console.log(err?.error?.error?.message);
-        },
-      });
+    let profileData: any = {
+      Id: this.profiles.id,
+      firstName: this.ifirstname,
+      lastName: this.ilastName,
+      gender: this.igender,
+      phoneNumber: this.iphoneNumber,
+      email: this.iemail,
+      skills: this.iskills,
+      experience: this.iexperience,
+      appUserId: this.profiles.appUserId,
+    };
+    this.profileService.editProfile(profileData).subscribe({
+      next: (response: any) => {
+        this.profiles = response.data;
 
-      this.showEditForm = false;
-    } else {
-      console.error('User ID is null or undefined');
-    }
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err?.error?.error?.message);
+      },
+    });
+
+    this.showEditForm = false;
   }
 }

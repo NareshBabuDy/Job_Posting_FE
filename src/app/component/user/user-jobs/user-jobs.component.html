@@ -63,9 +63,14 @@
               </p>
             </div>
             <!-- Column 2: Apply Button -->
-            <div class="col-12 text-center mt-2">
+            <div *ngIf="job.count>0" class="col-12 text-center mt-2">
               <button class="btn btn-primary" (click)="applyToJob(job.id!)">
                 Apply Now
+              </button>
+            </div>
+            <div *ngIf="job.count<1" class="col-12 text-center mt-2">
+              <button class="btn btn-primary" disabled>
+                Unable to Apply
               </button>
             </div>
           </div>

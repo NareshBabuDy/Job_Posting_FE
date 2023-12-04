@@ -17,9 +17,10 @@ export class ProfileService {
     );
   }
 
-  addProfile(profile: Profile): Observable<AppResponse>{
+  addProfile(profile: Profile): Observable<AppResponse> {
     return this.http.post<AppResponse>(
-      `${urlEndpoint.baseUrl}/user/profile/`,profile
+      `${urlEndpoint.baseUrl}/user/profile/`,
+      profile
     );
   }
 
@@ -30,8 +31,8 @@ export class ProfileService {
   }
 
   editProfile(profiles: any): Observable<AppResponse> {
-    const appurl=  `${urlEndpoint.baseUrl}/user/profile`
-    return this.http.put<AppResponse>(appurl,profiles);
-    
+    return this.http.put<AppResponse>(
+      `${urlEndpoint.baseUrl}/user/profile/`,profiles
+    );
   }
 }

@@ -48,12 +48,11 @@ export class UserJobsComponent implements OnInit {
     let applyto: any = {
       profileId: this.userId.id,
       jobId: jobId,
-      
       status: 'Applied',
     };
     this.applyService.applyToJob(applyto).subscribe({
       next: (response: any) => {
-        console.log('hello');
+        this.ngOnInit;
         this.showLottie = true;  
       },
       error: (err) => {

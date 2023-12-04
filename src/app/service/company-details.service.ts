@@ -9,25 +9,18 @@ import { CompanyDetail } from '../model/company-detail';
   providedIn: 'root',
 })
 export class CompanyDetailsService {
-  editCompanyDetail(company: any): Observable<AppResponse>  {
-    return this.http.put<AppResponse>(
-      `${urlEndpoint.baseUrl}/recruiter/company`,company
-    );
-
-  }
-  addCompanyDetails(company: CompanyDetail): Observable<AppResponse>  {
-    return this.http.post<AppResponse>(
-      `${urlEndpoint.baseUrl}/recruiter/company`,company
-    );
-  }
-  getCompanyDetail(id: number): Observable<AppResponse>  {
-    return this.http.get<AppResponse>(
-      `${urlEndpoint.baseUrl}/recruiter/company/`+id
-    ); 
-  }
-  
-  
   constructor(private http: HttpClient) {}
+  editCompanyDetail(company: any): Observable<AppResponse> {
+    return this.http.put<AppResponse>(
+      `${urlEndpoint.baseUrl}/recruiter/company`,
+      company
+    );
+  }
+  getCompanyDetail(id: number): Observable<AppResponse> {
+    return this.http.get<AppResponse>(
+      `${urlEndpoint.baseUrl}/recruiter/company/` + id
+    );
+  }
 
   getAllCompanyDetails(): Observable<AppResponse> {
     return this.http.get<AppResponse>(
@@ -35,4 +28,3 @@ export class CompanyDetailsService {
     );
   }
 }
-

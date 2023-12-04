@@ -12,16 +12,15 @@ import { StorageService } from 'src/app/service/storage.service';
   templateUrl: './recruiter-details.component.html',
 })
 export class RecruiterDetailsComponent implements OnInit {
-  showEditForm: boolean = false;
-  iCompanyName: string = '';
-  iCompanyUrl: string = '';
-  iAbout: string = '';
-  iCompanyPhoto: any[] = [];
   constructor(
     private companyServices: CompanyDetailsService,
     private storageService: StorageService
   ) {}
+  showEditForm: boolean = false;
   error: string = '';
+  iCompanyName: string = '';
+  iCompanyUrl: string = '';
+  iAbout: string = '';
   company: CompanyDetail = {
     id: 0,
     companyName: '',
@@ -29,6 +28,8 @@ export class RecruiterDetailsComponent implements OnInit {
     appUserId: 0,
     aboutCompany: '',
   };
+  id: number = this.company.appUserId;
+  
   user: AppUser = this.storageService.getLoggedInUser();
   ngOnInit(): void {
     this.companyServices.getCompanyDetail(this.user.id).subscribe({
@@ -42,35 +43,34 @@ export class RecruiterDetailsComponent implements OnInit {
       },
     });
   }
-  edit() {
+  edit(company: CompanyDetail) {
     this.showEditForm = true;
-    this.iCompanyName = this.company.companyName;
-    this.iCompanyUrl = this.company.companyUrl;
-    this.iAbout = this.company.aboutCompany;
+    this.iCompanyName = company.companyName
+    this.iAbout = company.aboutCompany
+    this.iCompanyUrl = company.companyUrl
   }
   onSubmit() {
-    let company: any = {
-      id: this.company.id,
+    let updateCompany: any = {
+      id: this.company.id!,
       companyName: this.iCompanyName,
       companyUrl: this.iCompanyUrl,
-      appUserId: this.user.id,
       aboutCompany: this.iAbout,
-    };
-
-    this.companyServices.editCompanyDetail(company).subscribe({
+      appUserId: this.company.appUserId
+    }
+    console.log(updateCompany);
+    
+    this.companyServices.editCompanyDetail(updateCompany).subscribe({
       next: (response: AppResponse) => {
         this.company = response.data;
-        console.log(this.company);
+        this.iCompanyName = ''
+        this.iAbout = ''
+        this.iCompanyUrl = ''
+        this.showEditForm = false;
       },
       error: (err) => {
         let message: string = err?.error?.error?.message;
         this.error = message.includes(',') ? message.split(',')[0] : message;
       },
     });
-    this.showEditForm = false;
-    this.iCompanyName = '';
-    this.iCompanyUrl = '';
-    this.iAbout = '';
-    this.showEditForm = false;
   }
 }
